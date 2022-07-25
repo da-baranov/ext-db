@@ -1,0 +1,40 @@
+﻿@page
+@model ExtDb.Pages.DemoModel
+@{
+}
+
+<!DOCTYPE HTML>
+<html manifest="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+
+    <title>MyDemo</title>
+    <!--base href="~/demo/" / -->
+    <script type="text/javascript">
+        var Ext = Ext || {}; // Ext namespace won't be defined yet...
+
+        Ext.beforeLoad = function (tags) {
+            var s = location.search, profile;
+
+            if (s.match(/\bclassic\b/)) {
+                profile = 'demo/classic';
+            }
+            else if (s.match(/\bmodern\b/)) {
+                profile = 'demo/modern';
+            }
+            else {
+                profile = tags.desktop ? 'demo/classic' : 'demo/modern';
+            }
+
+            Ext.manifest = profile;
+        };
+    </script>
+
+    <script id="microloader" data-app="f54f4456-d9ff-4321-b6b0-7f8cdee59cda" type="text/javascript" src="~/demo/bootstrap.js"></script>
+
+</head>
+<body></body>
+</html>
+

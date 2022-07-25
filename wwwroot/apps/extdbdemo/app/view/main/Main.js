@@ -30,15 +30,17 @@ Ext.define('ExtDbDemo.view.main.Main', {
             width: "30%",
             store: {
                 type: "tree",
+                proxy: {
+                    type: 'ajax',
+                    url: Ext.getResourcePath('menu.json'),
+                    reader: {
+                        type: 'json',
+                        rootProperty: 'children'
+                    }
+                },
                 root: {
                     expanded: true,
-                    text: "Examples",
-                    children: [
-                        { text: 'Async message boxes', leaf: true, id: 0 },
-                        { text: 'Grid mixin', leaf: true, id: 1 },
-                        { text: 'ACE code editor', leaf: true, id: 2 },
-                        { text: 'Font Awesome CDN example', leaf: true, id: 3 }
-                    ]
+                    text: "Examples"
                 }
             },
             bind: {

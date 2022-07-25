@@ -2481,7 +2481,7 @@ Ext.define('ExtDb.mixin.Grid', {extend:'Ext.Mixin', mixinConfig:{after:{initComp
   this.setFirstRowAlwaysSelected();
   this.handleKeys();
 }});
-Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], extend:'Ext.container.Container', alias:'widget.acecodeeditor', border:false, config:{value:null, mode:'json'}, publishes:['value'], _editor:null, _beautify:null, _ACE_BASE_URL:'https://cdnjs.cloudflare.com/ajax/libs/ace/', _ACE_VERSION:'1.8.1', updateValue:function(value) {
+Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], extend:'Ext.container.Container', alias:'widget.acecodeeditor', border:false, config:{value:null, mode:'json'}, publishes:['value'], _editor:null, _beautify:null, updateValue:function(value) {
   if (!value) {
     value = '';
   }
