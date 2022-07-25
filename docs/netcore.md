@@ -109,16 +109,18 @@ sencha app build development
 </html>
 ```
 
-- Lets take a look at the `script` tag. It executes so called `microloader` from the `bootstrap.js` file.
+- Let's take a look at the `script[id=microloader]` tag. It executes so called ExtJS `microloader` from the `bootstrap.js` file.
   But if you run your application and open your browser at `http://localhost:1234/Test`, you'll see nothing. 
-  That's because root directores do not match.
+  That's because root directores do not match. The loader expects the base URL to be '/', but ours is '/Test'. 
+
+  Learning ExtJS you should actively use browser debugging tools that allow you to locate such a problems with relative addresses in ExtJS.
 
 - Let's slightly modify the ExtJS `microloader` url:
 ```html
 <script id="microloader" data-app="f54f4456-d9ff-4321-b6b0-7f8cdee59cda" type="text/javascript" src="~/demo/bootstrap.js"></script>
 ```
 
-- Once again, the app isn't working as the `microloader` wants you page to be the root `/` URL and not the `/Test`
+- Once again, the app isn't working as the `microloader` wants you page to have root `/` URL and not `/Test`
 
 - How to solve such a problem? There are two approaches:
 
@@ -140,22 +142,23 @@ In your Test.cshtml markup, insert the `base` element and change the application
 
 ## Method 2
 
-1. Open app.json
-2. Find the "indexHtmlPath" param and change value from `"index.html"` to `"../index.html"`. If your Sencha app resides deeper, just add one more navigational path, for example - `../../index.html`
-3. Execute the following command which performs **full rebuild of Sencha ExtJS app manifests** (classic.json and modern.json) because of changed value of 
-3. the indexHtmlPath property:
+* Open the app.json manifest
+* Find the `indexHtmlPath` param and change value from `index.html` to `../index.html`. If your Sencha app resides deeper, just add one more navigational path, for example - `../../index.html`
+* Execute the following batch which performs **full rebuild of Sencha ExtJS app manifests** (classic.json and modern.json) because of changed value of 
+ the `indexHtmlPath` property:
 
 ```
 cd wwwroot/demo
 sencha app build development
 ```
 
-4. Modify your launcher script as follows (Test.cshtml):
+* Modify your launcher script as follows (Test.cshtml). Later you can replace hardcoded base URLs with methods of the `@Url` helper:
+* Modify your launcher script as follows (Test.cshtml). Later you can replace hardcoded base URLs with methods of the `@Url` helper:
 
 ```html
     <!--base href="~/demo/" / -->
     <script type="text/javascript">
-        var Ext = Ext || {}; // Ext namespace won't be defined yet...
+        var Ext = Ext || {};
 
         Ext.beforeLoad = function (tags) {
             var s = location.search, profile;
