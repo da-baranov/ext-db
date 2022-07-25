@@ -18,9 +18,6 @@
     _editor: null,
     _beautify: null,
 
-    _ACE_BASE_URL: "https://cdnjs.cloudflare.com/ajax/libs/ace/",
-    _ACE_VERSION: "1.8.1",
-
     updateValue: function (value) {
         if (!value) value = "";
         if (this._editor) {
