@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="docs\" />
     <Folder Include="wwwroot\apps\packages\local\ext-db\src\plugin\" />
     <Folder Include="wwwroot\apps\packages\local\ext-db\src\store\" />
   </ItemGroup>
