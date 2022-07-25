@@ -139,7 +139,8 @@ In your Test.cshtml markup, insert the `base` element and change the application
 
 1. Open app.json
 2. Find the "indexHtmlPath" param and change value from `"index.html"` to `"../index.html"`. If your Sencha app resides deeper, just add one more navigational path, for example - `../../index.html`
-3. Execute the following command which performs **full rebuild of manifests** (classic.json and modern.json):
+3. Execute the following command which performs **full rebuild of Sencha ExtJS app manifests** (classic.json and modern.json) because of changed value of 
+3. the indexHtmlPath property:
 
 ```
 cd wwwroot/demo
