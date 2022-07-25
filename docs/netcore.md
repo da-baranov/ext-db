@@ -5,7 +5,7 @@
 - Ensure that the project has a `wwwroot` folder, and also that Razor Pages or Razor Views (or both) are enabled.
   For example, I use Razor Pages, and in my Program.cs file I see the following lines:
 
-```CSharp
+```c-sharp
 builder.Services.AddRazorPages();           // enables Razor MVVM
 builder.Services.AddControllersWithViews(); // if you prefer classic MVC
 ...
@@ -20,8 +20,9 @@ app.MapControllers();	                    // enables requests to MVC and WebApi 
 ```bash
 cd wwwroot
 sencha -sdk C:\sencha\sdk\ext-7.0.0 generate app MyDemo ./demo
+# the -sdk options tells the generator to use a local cloned version of Sencha ExtJS SDK
 # MyApp is a name of your application
-# ./app - relative path where the application should be created
+# ./demo - relative path the ExtJS application should be created in
 ```
 
 - At this point, your project directory tree should look like
@@ -35,7 +36,7 @@ AspNetCoreApp
       |-bootstrap.js
       |-classic.json
       |-modern.json
-      |-index.html       <-- Single page application (SPA) entry point
+      |-index.html       <-- Single page web application (SPA) entry point
       |-...
       |-app
         |-model
@@ -49,6 +50,8 @@ AspNetCoreApp
       |-resources
   |-Pages
     |-Test.cshtml        <-- We will use that instead of index.html
+  |-Controllers          <-- Optional
+  |-Views                <-- Optional
 ```
 
 - Navigate to the wwwroot/demo folder and execute the following command:
