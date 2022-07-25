@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    {
+      "firstName": "Mickey",
+      "lastName": "Mouse"
+    },
+    {
+      "firstName": "Donald",
+      "lastName": "Duck"
+    },
+    {
+      "firstName": "Donald",
+      "lastName": "Trump"
+    }
+  ]
+}
