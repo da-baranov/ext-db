@@ -8,13 +8,15 @@ ExtDb is an ExtJS package containing a set of handy reusable components. It save
 
 [How to create a multipage Sencha ExtJS application using Sencha SDK and Sencha Cmd](docs/generating-multipage-app.md)
 
-[The easiest way to create an ExtJs package](docs/easiest-way-package.md)
+[The easiest way to create an ExtJS package](docs/easiest-way-package.md)
 
 [Shared resources in ExtJS (images, JSONs, XMLs)](docs/resources.md)
 
 [How can I use async/await functions with ExtJS?](docs/async-await.md)
 
-# Recipes
+[Welcome (splash) screen with ExtJS and .NET](docs/splash.md)
+
+## Recipes
 
 Here is a list of recipes which are provided with a working demo each.
 
