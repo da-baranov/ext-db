@@ -14,6 +14,8 @@ ExtDb is an ExtJS package containing a set of handy reusable components. It save
 
 [How can I use async/await functions with ExtJS?](docs/async-await.md)
 
+[Welcome (splash) screen with ExtJS and .NET](docs/splash.md)
+
 # Recipes
 
 Here is a list of recipes which are provided with a working demo each.
