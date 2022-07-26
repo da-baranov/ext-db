@@ -142,7 +142,7 @@ In your Test.cshtml markup, insert the `base` element and change the application
 
 ## Method 2
 
-* Open the app.json manifest
+* Open the `app.json` manifest
 * Find the `indexHtmlPath` param and change value from `index.html` to `../index.html`. If your Sencha app resides deeper, just add one more navigational path, for example - `../../index.html`
 * Execute the following batch which performs **full rebuild of Sencha ExtJS app manifests** (classic.json and modern.json) because of changed value of 
  the `indexHtmlPath` property:
@@ -152,8 +152,7 @@ cd wwwroot/demo
 sencha app build development
 ```
 
-* Modify your launcher script as follows (Test.cshtml). Later you can replace hardcoded base URLs with methods of the `@Url` helper:
-* Modify your launcher script as follows (Test.cshtml). Later you can replace hardcoded base URLs with methods of the `@Url` helper:
+* Modify your launcher script as follows (`Test.cshtml`). Later you can replace hardcoded base URLs with methods of the `@Url` helper:
 
 ```html
     <!--base href="~/demo/" / -->
@@ -186,4 +185,4 @@ sencha app build development
     ></script>
 ```
 
-5. Run debugger and navigate the browser to /Test
+* Run debugger and navigate the browser to `/Test`
