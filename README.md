@@ -1,8 +1,6 @@
 # ext-db
 
-Various ExtJS how-tos, thoughts, tools, utilities, and extensions.
-
-For your interest:
+Various ExtJS tools, utilities, and extensions, as well as some thoughts and howtos about ExtJS on .NET.
 
 [Integrating ExtJS and .NET Core web application](docs/netcore.md)
 
