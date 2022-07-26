@@ -33,15 +33,18 @@ that has to be removed from HTML DOM on ExtJS application start:
         font-family: Tahoma, Arial, Verdana;
     }
     </style>
-
+    ...
+</head>
+<body>
     <div id="loading-overlay">
         <div id="loading-overlay-box">
             <div><img src="~/images/logo.png" /></div>
             <div><b><i class="fas fa-spinner fa-spin"></i> Loading, please wait...</b></div>
         </div>
     </div>
-    <script defer id="microloader" src="~/app/bootstrap.js"></script>
-</head>
+    <script async="async" id="microloader" src="~/app/bootstrap.js"></script>
+</body>
+
 ```
 
 `/wwwroot/app/app.js`:
@@ -57,7 +60,7 @@ Ext.application({
 
     launch: function () {
         ...
-        var el = document.getElementById("loading-overlay");
+        const el = document.getElementById("loading-overlay");
         if (el) el.remove();
         ...
     }

@@ -19,6 +19,11 @@
       "text": "Font Awesome CDN example",
       "leaf": true,
       "id": 3
+    },
+    {
+      "text": "Async AJAX requests",
+      "leaf": true,
+      "id": 4
     }
   ]
 }

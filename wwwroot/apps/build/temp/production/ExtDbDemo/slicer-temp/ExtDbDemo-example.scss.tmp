@@ -935,6 +935,7 @@ $include-extdbdemo-view-acedemoview: dynamic(true);;
 $include-extdbdemo-model-base: dynamic(true);;
 $include-extdbdemo-model-personnel: dynamic(true);;
 $include-extdbdemo-store-personnel: dynamic(true);;
+$include-extdbdemo-view-ajaxview: dynamic(true);;
 $include-extdbdemo-view-asyncmessageboxesview: dynamic(true);;
 $include-extdbdemo-view-fontawesomeview: dynamic(true);;
 $include-extdbdemo-view-gridview: dynamic(true);;

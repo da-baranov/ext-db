@@ -1,23 +1,14 @@
 ﻿Ext.define('ExtDbDemo.view.AsyncMessageBoxesView', {
-    requires: [
-        'ExtDb.MessageBox'
-    ],
-
-    alias: 'widget.asyncmessageboxesview',
-    extend: 'Ext.panel.Panel',
-    title: 'Async message boxes',
-
-    layout: {
-        type: 'center'
-    },
-
+    requires: ["ExtDb.MessageBox"],
+    alias: "widget.asyncmessageboxesview",
+    extend: "Ext.panel.Panel",
+    title: "Async message boxes",
+    layout: "border",
     items: [
         {
-            xtype: "container",
-            defaults: {
-                margin: 2
-            },
-            items: [
+            xtype: "panel",
+            region: "center",
+            tbar: [
                 {
                     xtype: 'button',
                     text: 'Error',
@@ -39,7 +30,7 @@
                     text: 'Prompt',
                     handler: async function () {
                         const name = await ExtDb.MessageBox.prompt("Name", "Enter your name");
-                        alert(name);
+                        if (name) alert(`Hello ${name}!`);
                     },
                     iconCls: "fa fa-terminal"
                     
@@ -49,9 +40,22 @@
                     text: 'Confirm',
                     handler: async function () {
                         const mr = await ExtDb.MessageBox.confirm("Confirm", "Exit program?");
-                        alert(mr);
                     },
                     iconCls: "fa fa-question-circle"
+                }
+            ]
+        },
+        {
+            title: "Source",
+            layout: "fit",
+            region: "south",
+            height: 300,
+            split: true,
+            items: [
+                {
+                    xtype: "acecodeeditor",
+                    mode: "javascript",
+                    url: "apps/extdbdemo/app/view/AsyncMessageBoxesView.js"
                 }
             ]
         }

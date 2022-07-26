@@ -8,6 +8,7 @@
 
     config: {
         value: null,
+        url: null,
         mode: "json"
     },
 
@@ -61,9 +62,17 @@
         me._beautify = window.ace.require("ace/ext/beautify");
         me._editor.setTheme("ace/theme/chrome");
         me._editor.session.setMode("ace/mode/" + mode);
-        if (me.initialConfig && me.initialConfig.value) {
-            me.updateValue(me.initialConfig.value);
+
+        const initialValue = (me.initialConfig && me.initialConfig.value) || (me.getValue && me.getValue());
+        if (initialValue) {
+            me.updateValue(initialValue);
         }
+
+        const url = (me.initialConfig && me.initialConfig.url) || (me.getUrl && me.getUrl());
+        if (url) {
+            me.loadUrl(url);
+        }
+
         me._editor.on("change", function (e) {
             var editorValue = me._editor.getValue();
             if (!editorValue) editorValue = "";
@@ -74,17 +83,6 @@
                 me.fireEvent("change", me, editorValue);
             }
         });
-
-        return;
-
-        // Executing workers
-        ExtDb.AsyncLoader
-            .loadAll(scripts)
-            .then(function () {
-            })
-            .catch(function (e) {
-                alert(e);
-            });
     },
 
     beautify: function () {
@@ -93,5 +91,23 @@
 
     insert: function (text) {
         this._editor.insert(text);
+    },
+
+    loadUrl: function (url) {
+        const me = this;
+        window
+            .fetch(url)
+            .then(function (response) {
+                response.text()
+                    .then(function (text) {
+                        me.setValue(text);
+                    })
+                    .catch(function (e) {
+                        throw e;
+                    });
+            })
+            .catch(function (e) {
+                throw e;
+            });
     }
 });

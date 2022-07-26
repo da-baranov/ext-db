@@ -2440,25 +2440,29 @@ Ext.define('ExtDb.MessageBox', {statics:{alert:function(title, message) {
 Ext.define('ExtDb.Version', {statics:{getVersion:function() {
   return '1.0.0.0';
 }}});
-Ext.define('ExtDb.mixin.Grid', {extend:'Ext.Mixin', mixinConfig:{after:{initComponent:'init'}}, handleKeys:function() {
+Ext.define('ExtDb.mixin.Grid', {extend:'Ext.Mixin', mixinConfig:{after:{initComponent:'_extend'}}, _extend:function() {
   var me = this;
-  this.on('rowkeydown', function(sender, record, element, rowIndex, e) {
+  me.setFirstRowAlwaysSelected();
+  me.handleKeys();
+}, handleKeys:function() {
+  var grid = this;
+  grid.on('rowkeydown', function(sender, record, element, rowIndex, e) {
     if (e.getKey() === Ext.event.Event.INSERT) {
-      return this.fireEvent('oninsert', sender, record, element, rowIndex);
+      return grid.fireEvent('oninsert', sender, record, element, rowIndex);
     }
     if (e.getKey() === Ext.event.Event.DELETE) {
       if (record) {
-        return this.fireEvent('ondelete', sender, record, element, rowIndex);
+        return grid.fireEvent('ondelete', sender, record, element, rowIndex);
       }
     }
     if (e.getKey() === Ext.event.Event.ENTER) {
       if (record) {
-        return this.fireEvent('onedit', sender, record, element, rowIndex);
+        return grid.fireEvent('onedit', sender, record, element, rowIndex);
       }
     }
     if (e.getKey() === Ext.event.Event.F5) {
       e.preventDefault();
-      var result = this.fireEvent('onrefresh', sender, record, element, rowIndex);
+      var result = grid.fireEvent('onrefresh', sender, record, element, rowIndex);
       if (!result) {
         return false;
       }
@@ -2468,7 +2472,8 @@ Ext.define('ExtDb.mixin.Grid', {extend:'Ext.Mixin', mixinConfig:{after:{initComp
     }
   });
 }, setFirstRowAlwaysSelected:function() {
-  var store = this.getStore();
+  var grid = this;
+  var store = grid.getStore();
   var selectionModel = this.getSelectionModel();
   if (store && selectionModel) {
     store.on('load', function(sender, records) {
@@ -2477,11 +2482,8 @@ Ext.define('ExtDb.mixin.Grid', {extend:'Ext.Mixin', mixinConfig:{after:{initComp
       }
     });
   }
-}, init:function() {
-  this.setFirstRowAlwaysSelected();
-  this.handleKeys();
 }});
-Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], extend:'Ext.container.Container', alias:'widget.acecodeeditor', border:false, config:{value:null, mode:'json'}, publishes:['value'], _editor:null, _beautify:null, updateValue:function(value) {
+Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], extend:'Ext.container.Container', alias:'widget.acecodeeditor', border:false, config:{value:null, url:null, mode:'json'}, publishes:['value'], _editor:null, _beautify:null, updateValue:function(value) {
   if (!value) {
     value = '';
   }
@@ -2516,8 +2518,13 @@ Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], ext
   me._beautify = window.ace.require('ace/ext/beautify');
   me._editor.setTheme('ace/theme/chrome');
   me._editor.session.setMode('ace/mode/' + mode);
-  if (me.initialConfig && me.initialConfig.value) {
-    me.updateValue(me.initialConfig.value);
+  var initialValue = me.initialConfig && me.initialConfig.value || me.getValue && me.getValue();
+  if (initialValue) {
+    me.updateValue(initialValue);
+  }
+  var url = me.initialConfig && me.initialConfig.url || me.getUrl && me.getUrl();
+  if (url) {
+    me.loadUrl(url);
   }
   me._editor.on('change', function(e) {
     var editorValue = me._editor.getValue();
@@ -2533,13 +2540,20 @@ Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], ext
       me.fireEvent('change', me, editorValue);
     }
   });
-  return;
-  ExtDb.AsyncLoader.loadAll(scripts).then(function() {
-  })['catch'](function(e) {
-    alert(e);
-  });
 }, beautify:function() {
   this._beautify.beautify(this._editor.session);
 }, insert:function(text) {
   this._editor.insert(text);
+}, loadUrl:function(url) {
+  var me = this;
+  window.fetch(url).then(function(response) {
+    response.text().then(function(text) {
+      me.setValue(text);
+    })['catch'](function(e) {
+      throw e;
+    });
+  })['catch'](function(e) {
+    throw e;
+  });
 }});
+Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgrid', 'widget.extdbgridpanel'], mixins:['ExtDb.mixin.Grid']});

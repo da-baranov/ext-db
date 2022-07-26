@@ -10,7 +10,7 @@ Ext.define('ExtDbDemo.view.main.Main', {
         'ExtDbDemo.view.GridView',
         'ExtDbDemo.View.AceDemoView',
         'ExtDbDemo.view.FontAwesomeView',
-
+        'ExtDbDemo.view.AjaxView'
     ],
 
     controller: 'main',
@@ -66,6 +66,9 @@ Ext.define('ExtDbDemo.view.main.Main', {
                 },
                 {
                     xtype: "fontawesomeview"
+                },
+                {
+                    xtype: "ajaxview"
                 }
             ]
         }
