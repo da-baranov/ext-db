@@ -25,26 +25,13 @@ Ext.define('ExtDbDemo.view.main.Main', {
             xtype: "treepanel",
             title: "ExtDb examples",
             itemId: "treeMenu",
+            reference: "treeMenu",
             region: "west",
             split: true,
             width: "30%",
-            store: {
-                type: "tree",
-                proxy: {
-                    type: 'ajax',
-                    url: Ext.getResourcePath('menu.json'),
-                    reader: {
-                        type: 'json',
-                        rootProperty: 'children'
-                    }
-                },
-                root: {
-                    expanded: true,
-                    text: "Examples"
-                }
-            },
             bind: {
-                selection: "{node}"
+                selection: "{node}",
+                store: "{menu}"
             }
         },
         {

@@ -13,6 +13,7 @@
                     xtype: "button",
                     text: "Load currency exchange rates",
                     handler: async function () {
+                        
                         const out = this.up("ajaxview").down("#txtJson");
                         try {
                             out.mask("Loading...");

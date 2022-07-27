@@ -923,6 +923,7 @@ $include-ext-view-view: dynamic(true);;
 $include-ext-window-messagebox: dynamic(true);;
 $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
+$include-extdb: dynamic(true);;
 $include-extdb-ajax: dynamic(true);;
 $include-extdb-asyncloader: dynamic(true);;
 $include-extdb-error: dynamic(true);;

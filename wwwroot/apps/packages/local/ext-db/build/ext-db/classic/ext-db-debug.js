@@ -2396,6 +2396,9 @@ Ext.define('ExtDb.Error', {statics:{toError:function(e) {
     throw error;
   }
 }}});
+Ext.define('ExtDb', {statics:{test:function() {
+  alert('aaa');
+}}});
 Ext.define('ExtDb.FontAwesome', {requires:['ExtDb.AsyncLoader'], statics:{_faUrl:'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/', version:'6.1.1', enable:function() {
   var baseUrl = this._faUrl + this.version;
   var urls = [baseUrl + '/css/all.min.css', baseUrl + '/js/all.min.js'];

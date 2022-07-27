@@ -1,6 +1,6 @@
 # ExtDb - Sencha ExtJS tips, tricks, and recipes
 
-ExtDb is an ExtJS package containing a set of handy reusable components. It saves your time and relieves you of the need to copy and paste code from one ExtJS project to another. 
+Various ExtJS notes, tools, utilities, and extensions.
 
 ## ExtJS common tasks
 
@@ -17,8 +17,6 @@ ExtDb is an ExtJS package containing a set of handy reusable components. It save
 [Welcome (splash) screen with ExtJS and .NET](docs/splash.md)
 
 ## Recipes
-
-Here is a list of recipes which are provided with a working demo each.
 
 ExtJS grid keyboard keys handler mixin (INS, DEL, F5, ENTER) - [demo](wwwroot/index.html#example/0)
 
