@@ -18,20 +18,14 @@ Various ExtJS notes, tools, utilities, and extensions.
 
 ## Recipes
 
-ExtJS grid keyboard keys handler mixin (INS, DEL, F5, ENTER) - [demo](wwwroot/index.html#example/0)
+Complete Grid/Modal CRUD [demo](wwwroot/index.html#example/1)
 
-Async message boxes - [demo](wwwroot/index.html#example/1)
+Async message boxes [demo](wwwroot/index.html#example/0)
 
-Yet another Ajax utility class with async methods - demo
+ACE code editor as ExtJS component [demo](wwwroot/index.html#example/2)
 
-Mixin detecting unsaved changes in a modal form - demo
+Latest Font Awesome [demo](wwwroot/index.html#example/3)
 
 Global error handling in ExtJS - demo
 
 Universal error handler utility class - demo
-
-Code editor implemented with ExtJS - demo
-
-Some useful patterns for ExtJS stores - demo
-
-The easiest way to create an ExtJs package

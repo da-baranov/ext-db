@@ -1,13 +1,19 @@
 ﻿Ext.define("ExtDbDemo.view.GridView", {
     requires: [ 
         "ExtDb.grid.Panel",
-        "ExtDb.component.AceCodeEditor"
+        "ExtDb.component.AceCodeEditor",
+        "ExtDbDemo.view.GridViewController",
+        "ExtDbDemo.view.GridViewModel"
     ],
     extend: "Ext.panel.Panel",
-    title: "Grid panel mixin",
+    title: "Complete CRUD (Grid + Modal Form) example",
     alias: "widget.extdbdemogridview",
+    controller: "gridviewcontroller",
+    viewModel: "gridviewmodel",
+
     layout: "border",
     defaultFocus: "dgr",
+    
     items: [
         {
             xtype: "extdbgrid",
@@ -16,82 +22,120 @@
             tbar: [
                 {
                     iconCls: 'fa fa-plus',
-                    text: 'Insert (INS)'
+                    text: 'Insert',
+                    tooltip: "INS",
+                    handler: "createPatient"
                 },
                 {
                     iconCls: 'fa fa-edit',
-                    text: 'Edit (ENTER)'
+                    text: 'Edit',
+                    tooltip: "ENTER",
+                    bind: {
+                        disabled: "{!selection}"
+                    },
+                    handler: "editPatient"
                 },
                 {
                     iconCls: 'fa fa-trash',
-                    text: 'Delete (DEL)'
+                    text: 'Delete',
+                    tooltip: "DEL",
+                    bind: {
+                        disabled: "{!selection}"
+                    },
+                    handler: "deletePatients"
                 },
                 {
                     iconCls: 'fas fa-sync',
-                    text: "Refresh (F5)",
-                    handler: function () {
-                        this.up("grid").getStore().reload();
+                    text: "Refresh",
+                    tooltip: "F5"
+                },
+                '-',
+                {
+                    xtype: "label",
+                    bind: {
+                        text: " {checked.length} record(s) checked"
                     }
                 }
             ],
 
-            store: {
-                autoLoad: true,
-                proxy: {
-                    type: 'ajax',
-                    url: 'json/people.json',
-                    reader: {
-                        type: 'json',
-                        rootProperty: 'data'
-                    }
-                }
+            bind: {
+                store: "{patients}",
+                selection: "{selection}",
+                checked: "{checked}"
             },
 
             columns: [
                 {
                     text: "First Name",
                     dataIndex: "firstName",
-                    width: 200,
+                    flex: 2
                 },
                 {
                     text: "Last Name",
                     dataIndex: "lastName",
+                    flex: 2
+                },
+                {
+                    xtype: "datecolumn",
+                    format: "d.m.Y",
+                    text: "Birth Date/Time",
+                    dataIndex: "birthTime",
                     flex: 1
-                }
+                },
+                {
+                    text: "Gender",
+                    dataIndex: "gender",
+                    flex: 1
+                },
             ],
-
-            listeners: {
-                oninsert: function (sender, record, element, rowindex) {
-                    Ext.toast('INS key has been pressed');
-                },
-                onedit: function (sender, record, element, rowindex) {
-                    Ext.toast('ENTER key has been pressed');
-                },
-                ondelete: function (sender, record, element, rowindex) {
-                    Ext.toast('DEL key has been pressed');
-                },
-                onrefresh: function () {
-                    Ext.toast('F5 key has been pressed');
-                }
-            }
         },
         {
             region: 'south',
             height: 40,
             bodyPadding: 8,
-            html: 'A simple mixin that improves Grid UX. First row is always selected, standard keyboard shortcuts (INS, DEL, ENTER, F5) are assigned.'
+            split: true,
+            html: 'A full CRUD example'
         },
         {
-            title: "Source",
-            layout: "fit",
+            xtype: "tabpanel",
             region: "south",
-            height: 300,
-            split: true,
+            height: 400,
             items: [
+                // 0
                 {
-                    xtype: "acecodeeditor",
-                    mode: "javascript",
-                    url: "apps/extdbdemo/app/view/GridView.js"
+                    title: "GridView.js",
+                    layout: "fit",
+                    items: [
+                        {
+                            xtype: "acecodeeditor",
+                            mode: "javascript",
+                            url: "apps/extdbdemo/app/view/GridView.js"
+                        }
+                    ]
+                },
+                // 1
+                {
+                    title: "ModalViewController.js",
+                    layout: "fit",
+                    items: [
+                        {
+                            xtype: "acecodeeditor",
+                            mode: "javascript",
+                            url: "apps/packages/local/ext-db/src/app/ModalViewController.js"
+                        }
+                    ]
+                },
+                // 2
+                {
+                    title: "ModalViewModel.js",
+                    layout: "fit",
+                    items: [
+                        {
+                            xtype: "acecodeeditor",
+                            mode: "javascript",
+                            url: "apps/packages/local/ext-db/src/app/ModalViewModel.js"
+                        }
+                    ]
                 }
             ]
         }
