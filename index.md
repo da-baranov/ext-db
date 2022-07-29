@@ -18,14 +18,12 @@ Various ExtJS notes, tools, utilities, and extensions.
 
 ## Recipes
 
-Complete Grid/Modal CRUD [demo](wwwroot/index.html#example/1)
+Complete Grid/Modal CRUD [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)
 
-Async message boxes [demo](wwwroot/index.html#example/0)
+Async message boxes [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/0)
 
-ACE code editor as ExtJS component [demo](wwwroot/index.html#example/2)
+ACE code editor as ExtJS component [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/2)
 
-Latest Font Awesome [demo](wwwroot/index.html#example/3)
+Latest Font Awesome [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/3)
 
-Global error handling in ExtJS - demo
-
-Universal error handler utility class - demo
+Global error handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
