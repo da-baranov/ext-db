@@ -1,8 +1,7 @@
-# ExtDb - Sencha ExtJS tips, tricks, and recipes
+# ExtDb - Sencha ExtJS tips, tricks, and recipes 
+**Various ExtJS notes, tools, utilities, and extensions**
 
-Various ExtJS notes, tools, utilities, and extensions.
-
-## ExtJS common tasks
+## Recipes
 
 [Integrating ExtJS and .NET Core web application](docs/netcore.md)
 
@@ -20,7 +19,7 @@ Various ExtJS notes, tools, utilities, and extensions.
 
 [Generic exception handling in ExtJS](docs/error-handler.md)
 
-## Recipes
+## Demos
 
 Complete Grid/Modal CRUD [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)
 

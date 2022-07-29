@@ -2457,7 +2457,8 @@ Ext.define('ExtDb.Version', {statics:{getVersion:function() {
 }}});
 Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ext.app.ViewController', control:{'#':{beforeclose:function() {
   var view = this.getView();
-  return this.handleModalFormClosing();
+  var rv = this.handleModalFormClosing();
+  return rv;
 }}, 'form':{validitychange:function(sender, valid) {
   this.getViewModel().set('formValid', valid);
 }}}, isFormValid:function() {
@@ -2495,26 +2496,6 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
       }
     }
   }
-  var stores = viewModel.stores;
-  if (stores) {
-    for (var key$0 in stores) {
-      var store = viewModel.getStore(key$0);
-      if (store instanceof Ext.data.Store) {
-        var a = store.getNewRecords();
-        if (a && a.length) {
-          return true;
-        }
-        var b = store.getUpdatedRecords();
-        if (b && b.length) {
-          return true;
-        }
-        var c = store.getRemovedRecords();
-        if (c && c.length) {
-          return true;
-        }
-      }
-    }
-  }
   return false;
 }, handleModalFormClosing:function() {
   var me = this;
@@ -2522,7 +2503,9 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
   if (view.allowClose) {
     return true;
   }
-  if (me.isFormValid() === false) {
+  var isFormValid = me.isFormValid();
+  var hasChanges = me.hasChanges();
+  if (isFormValid === false && hasChanges === true) {
     Ext.Msg.show({title:'Question', message:'Form has invalid values. Close anyway?', buttons:Ext.Msg.YESNO, icon:Ext.Msg.QUESTION, fn:function(btn) {
       if (btn === 'yes') {
         view.allowClose = true;
@@ -2533,7 +2516,7 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
     }});
     return false;
   }
-  if (me.hasChanges() === true) {
+  if (hasChanges === true) {
     Ext.Msg.show({title:'Question', message:'You are closing a form that has unsaved changes. Do you want to save changes?', buttons:Ext.Msg.YESNOCANCEL, icon:Ext.Msg.QUESTION, fn:function(btn) {
       if (btn === 'yes') {
         try {
@@ -2583,8 +2566,7 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
   }
 }, saveRecord:function() {
   var record = this.getRecord();
-  record.endEdit();
-  record.dirty = false;
+  record.commit();
   this.fireEvent('saved', this, record);
   var view = this.getView();
   if (view) {
@@ -2627,10 +2609,18 @@ Ext.define('ExtDb.component.AceCodeEditor', {requires:['ExtDb.AsyncLoader'], ext
   return new Promise(function(resolve) {
     return setTimeout(resolve, ms);
   });
+}, setMode:function(value) {
+  this.callParent(arguments);
+  if (this._editor && this._editor.session) {
+    this._editor.session.setMode('ace/mode/' + value);
+  }
 }, initAce:function() {
   var me = this;
   var mode = me.getMode() || 'json';
   me._editor = window.ace.edit(me.ace_id);
+  window.ace.require('ace/worker/xml');
+  window.ace.require('ace/worker/html');
+  window.ace.require('ace/worker/json');
   me._beautify = window.ace.require('ace/ext/beautify');
   me._editor.setTheme('ace/theme/chrome');
   me._editor.session.setMode('ace/mode/' + mode);
@@ -2686,24 +2676,28 @@ Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgri
   grid.on('rowdblclick', function(sender, record, element, rowIndex) {
     grid.fireEvent('onedit', sender, record, element, rowIndex);
   });
-  grid.on('rowkeydown', function(sender, record, element, rowIndex, e) {
-    var me = this;
+  grid.on('containerkeydown', function(sender, e) {
     if (e.getKey() === Ext.event.Event.INSERT) {
-      return grid.fireEvent('oninsert', sender, record, element, rowIndex);
+      return grid.fireEvent('oninsert', sender);
+    }
+  });
+  grid.on('rowkeydown', function(sender, record, element, rowIndex, e) {
+    if (e.getKey() === Ext.event.Event.INSERT) {
+      return grid.fireEvent('oninsert', sender);
     }
     if (e.getKey() === Ext.event.Event.DELETE) {
       if (record) {
-        return grid.fireEvent('ondelete', sender, record, element, rowIndex);
+        return grid.fireEvent('ondelete', record, element, rowIndex, e);
       }
     }
-    if (e.getKey() === Ext.event.Event.F4) {
+    if (e.getKey() === Ext.event.Event.F2) {
       if (record) {
-        return grid.fireEvent('onedit', sender, record, element, rowIndex);
+        return grid.fireEvent('onedit', record, element, rowIndex, e);
       }
     }
     if (e.getKey() === Ext.event.Event.F5) {
       e.preventDefault();
-      var result = grid.fireEvent('onrefresh', sender, record, element, rowIndex);
+      var result = grid.fireEvent('onrefresh', sender);
       if (!result) {
         return false;
       }
