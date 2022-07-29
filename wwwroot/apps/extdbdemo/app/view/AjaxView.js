@@ -28,6 +28,7 @@
                 }
             ]
         },
+        
         {
             xtype: "acecodeeditor",
             height: 200,

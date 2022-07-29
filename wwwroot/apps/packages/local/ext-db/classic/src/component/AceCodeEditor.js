@@ -55,10 +55,20 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     },
 
+    setMode: function (value) {
+        this.callParent(arguments);
+        if (this._editor && this._editor.session) {
+            this._editor.session.setMode("ace/mode/" + value);
+        }
+    },
+
     initAce: function () {
         const me = this;
         const mode = me.getMode() || "json";
         me._editor = window.ace.edit(me.ace_id);
+        window.ace.require("ace/worker/xml");
+        window.ace.require("ace/worker/html");
+        window.ace.require("ace/worker/json");
         me._beautify = window.ace.require("ace/ext/beautify");
         me._editor.setTheme("ace/theme/chrome");
         me._editor.session.setMode("ace/mode/" + mode);

@@ -63,6 +63,7 @@
             }
         }
 
+        /*
         const stores = viewModel.stores;
         if (stores) {
             for (const key in stores) {
@@ -77,6 +78,7 @@
                 }
             }
         }
+        */
 
         return false;
     },
@@ -92,8 +94,11 @@
             return true;
         }
 
+        const isFormValid = me.isFormValid();
+        const hasChanges = me.hasChanges();
+
         // Form is invalid - show confirmation
-        if (me.isFormValid() === false) {
+        if (isFormValid === false && hasChanges === true) {
             Ext.Msg.show({
                 title: "Question",
                 message: "Form has invalid values. Close anyway?",
@@ -113,7 +118,7 @@
         }
 
         // Form has unsaved changes
-        if (me.hasChanges() === true) {
+        if (hasChanges === true) {
             Ext.Msg.show({
                 title: "Question",
                 message: "You are closing a form that has unsaved changes. Do you want to save changes?",
@@ -218,8 +223,7 @@
         const record = this.getRecord();
 
         // Mark record unchanged
-        record.endEdit();
-        record.dirty = false;
+        record.commit();
 
         // Fire events to notify caller
         this.fireEvent("saved", this, record);

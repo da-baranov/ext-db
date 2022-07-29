@@ -40,8 +40,6 @@
         });
 
         grid.on("containerkeydown", function (sender, e) {
-            const me = this;
-
             if (e.getKey() === Ext.event.Event.INSERT) {
                 return grid.fireEvent("oninsert", sender);
             }
