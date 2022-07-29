@@ -98,10 +98,10 @@
         },
         {
             region: 'south',
-            height: 40,
-            bodyPadding: 8,
+            height: 100,
+            bodyPadding: 4,
             split: true,
-            html: 'A full CRUD example'
+            html: 'A full ExtJS Grid + Modal CRUD example. The modal form controller controls the lifecycle of the modal form, in particular, prevents loss of unsaved changes, and does not allow a user to save invalid data'
         },
         {
             xtype: "tabpanel",
