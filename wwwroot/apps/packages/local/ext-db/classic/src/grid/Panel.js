@@ -39,29 +39,36 @@
             grid.fireEvent("onedit", sender, record, element, rowIndex);
         });
 
-        grid.on("rowkeydown", function (sender, record, element, rowIndex, e) {
+        grid.on("containerkeydown", function (sender, e) {
             const me = this;
 
             if (e.getKey() === Ext.event.Event.INSERT) {
-                return grid.fireEvent("oninsert", sender, record, element, rowIndex);
+                return grid.fireEvent("oninsert", sender);
+            }
+        });
+
+        grid.on("rowkeydown", function (sender, record, element, rowIndex, e) {
+
+            if (e.getKey() === Ext.event.Event.INSERT) {
+                return grid.fireEvent("oninsert", sender);
             }
 
             if (e.getKey() === Ext.event.Event.DELETE) {
                 if (record) {
-                    return grid.fireEvent("ondelete", sender, record, element, rowIndex);
+                    return grid.fireEvent("ondelete", record, element, rowIndex, e);
                 }
             }
 
-            if (e.getKey() === Ext.event.Event.F4) {
+            if (e.getKey() === Ext.event.Event.F2) {
                 if (record) {
-                    return grid.fireEvent("onedit", sender, record, element, rowIndex);
+                    return grid.fireEvent("onedit", record, element, rowIndex, e);
                 }
             }
 
             if (e.getKey() === Ext.event.Event.F5) {
                 e.preventDefault(); // prevents browser refresh
 
-                var result = grid.fireEvent("onrefresh", sender, record, element, rowIndex);
+                var result = grid.fireEvent("onrefresh", sender);
                 if (!result) return false;
 
                 const store = me.getStore();

@@ -16,6 +16,8 @@ Various ExtJS notes, tools, utilities, and extensions.
 
 [Welcome (splash) screen with ExtJS and .NET](docs/splash.md)
 
+[Sencha ExtJS Grid + Modal + CRUD full example](docs/modals.md)
+
 ## Recipes
 
 Complete Grid/Modal CRUD [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)

@@ -25,11 +25,15 @@
     },
 
     createForm: function () {
+        const me = this;
         const store = this.getStore("patients");
 
         const form = new ExtDbDemo.view.ModalForm();
         form.on("saved", function (sender, model) {
             store.add(model);
+        });
+        form.on("close", function () {
+            me.lookup("dgr").focus();
         });
         return form;
     },

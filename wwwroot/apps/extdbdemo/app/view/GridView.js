@@ -19,6 +19,7 @@
             xtype: "extdbgrid",
             region: "center",
             itemId: "dgr",
+            reference: "dgr",
             tbar: [
                 {
                     iconCls: 'fa fa-plus',
@@ -29,7 +30,7 @@
                 {
                     iconCls: 'fa fa-edit',
                     text: 'Edit',
-                    tooltip: "F4",
+                    tooltip: "F2",
                     bind: {
                         disabled: "{!selection}"
                     },
@@ -89,6 +90,11 @@
                     flex: 1
                 },
             ],
+
+            bbar: {
+                xtype: 'pagingtoolbar',
+                displayInfo: true
+            }
         },
         {
             region: 'south',

@@ -7,7 +7,8 @@
             // Modal form close event handler
             beforeclose: function () {
                 const view = this.getView();
-                return this.handleModalFormClosing();
+                const rv = this.handleModalFormClosing();
+                return rv;
             }
         },
         "form": {
