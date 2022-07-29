@@ -2321,7 +2321,13 @@ style:'white-space:nowrap; overflow: scroll;'}]}]}], fbar:[{xtype:'button', text
   this.up('window').fireEvent('ok');
   this.up('window').close();
 }}]});
-Ext.define('ExtDb.Error', {requires:['ExtDb.ErrorMessageBox'], statics:{toError:function(e) {
+Ext.define('ExtDb.Error', {requires:['ExtDb.ErrorMessageBox'], statics:{_prevExtErrorHandler:undefined, _prevWindowErrorHandler:undefined, _extErrorHandler:function(err) {
+  var error = this.toError(err);
+  this.errorMessageBox(error);
+}, _windowErrorHandler:function(event) {
+  var error = this.toError(event);
+  this.errorMessageBox(error);
+}, toError:function(e) {
   if (!e) {
     return new Error('Unexpected error');
   }
@@ -2410,6 +2416,15 @@ Ext.define('ExtDb.Error', {requires:['ExtDb.ErrorMessageBox'], statics:{toError:
   var error = this.toError(e);
   var messageBox = new ExtDb.ErrorMessageBox({message:error.message, stack:error.stack});
   messageBox.show();
+}, enableGlobalExceptionHandler:function() {
+  this._prevExtErrorHandler = Ext.Error.handle;
+  Ext.Error.handle = this._extErrorHandler;
+  window.addEventListener('error', this._windowErrorHandler);
+}, disableGlobalExceptionHandler:function() {
+  if (this._prevExtErrorHandler) {
+    Ext.Error.handle = this._prevExtErrorHandler;
+    window.removeEventListener('error', this._windowErrorHandler);
+  }
 }}});
 Ext.define('ExtDb.FontAwesome', {requires:['ExtDb.AsyncLoader'], statics:{_faUrl:'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/', version:'6.1.1', enable:function() {
   var baseUrl = this._faUrl + this.version;

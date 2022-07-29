@@ -3,6 +3,19 @@
         "ExtDb.ErrorMessageBox"
     ],
     statics: {
+        _prevExtErrorHandler: undefined,
+        _prevWindowErrorHandler: undefined,
+
+        _extErrorHandler: function (err) {
+            const error = ExtDb.Error.toError(err);
+            ExtDb.Error.errorMessageBox(error);
+        },
+
+        _windowErrorHandler: function (event) {
+            const error = ExtDb.Error.toError(event);
+            ExtDb.Error.errorMessageBox(error);
+        },
+
         toError: function (e) {
             // Undefined
             if (!e) {
@@ -121,6 +134,19 @@
             const error = this.toError(e);
             const messageBox = new ExtDb.ErrorMessageBox({ message: error.message, stack: error.stack });
             messageBox.show();
+        },
+
+        enableGlobalExceptionHandler: function () {
+            this._prevExtErrorHandler = Ext.Error.handle;
+            Ext.Error.handle = this._extErrorHandler;
+            window.addEventListener("error", this._windowErrorHandler);
+        },
+
+        disableGlobalExceptionHandler: function () {
+            if (this._prevExtErrorHandler) {
+                Ext.Error.handle = this._prevExtErrorHandler;
+            }
+            window.removeEventListener("error", this._windowErrorHandler);
         }
     }
 });

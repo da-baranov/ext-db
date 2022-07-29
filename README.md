@@ -27,6 +27,10 @@ Async message boxes [demo](https://da-baranov.github.io/ext-db/wwwroot/index.htm
 
 ACE code editor as ExtJS component [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/2)
 
-Latest Font Awesome [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/3)
+How to use latest Font Awesome from CDN [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/3)
 
-Global error handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
+Async Ajax/JSON requests in ExtJS [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/4)
+
+Generic exception handler in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
+
+Global exception handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6)

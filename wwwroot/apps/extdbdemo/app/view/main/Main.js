@@ -11,7 +11,8 @@ Ext.define('ExtDbDemo.view.main.Main', {
         'ExtDbDemo.View.AceDemoView',
         'ExtDbDemo.view.FontAwesomeView',
         'ExtDbDemo.view.AjaxView',
-        'ExtDbDemo.view.ErrorDemoView'
+        'ExtDbDemo.view.ErrorDemoView',
+        'ExtDbDemo.view.GlobalExView'
     ],
 
     controller: 'main',
@@ -67,6 +68,9 @@ Ext.define('ExtDbDemo.view.main.Main', {
                 },
                 {
                     xtype: "errordemoview"
+                },
+                {
+                    xtype: "globalexview"
                 }
             ]
         }

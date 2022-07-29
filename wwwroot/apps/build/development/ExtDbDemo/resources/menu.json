@@ -29,6 +29,11 @@
       "text": "Generic exception handling in ExtJS",
       "leaf": true,
       "id": 5
+    },
+    {
+      "text": "Global exception handlers in ExtJS",
+      "leaf": true,
+      "id": 6
     }
   ]
 }

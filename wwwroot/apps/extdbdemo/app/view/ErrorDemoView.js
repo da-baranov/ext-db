@@ -7,7 +7,6 @@ Ext.define('ExtDbDemo.view.ErrorDemoView',{
     ],
 
     alias: 'widget.errordemoview',
-    title: "Generic exception handling in ExtJS",
 
     controller: 'errordemoview',
     viewModel: {
@@ -19,7 +18,8 @@ Ext.define('ExtDbDemo.view.ErrorDemoView',{
     items: [
         // Top
         {
-            xtype: "container",
+            xtype: "panel",
+            title: "Generic exception handling in ExtJS",
             region: "center",
             layout: "center",
             items: [
@@ -70,6 +70,7 @@ Ext.define('ExtDbDemo.view.ErrorDemoView',{
                     items: [
                         {
                             xtype: "acecodeeditor",
+                            mode: "javascript",
                             url: "apps/packages/local/ext-db/src/Error.js"
                         }
                     ]
@@ -81,6 +82,7 @@ Ext.define('ExtDbDemo.view.ErrorDemoView',{
                     items: [
                         {
                             xtype: "acecodeeditor",
+                            mode: "javascript",
                             url: "apps/packages/local/ext-db/classic/src/ErrorMessageBox.js"
                         }
                     ]
@@ -92,6 +94,7 @@ Ext.define('ExtDbDemo.view.ErrorDemoView',{
                     items: [
                         {
                             xtype: "acecodeeditor",
+                            mode: "javascript",
                             url: "apps/extdbdemo/app/view/ErrorDemoViewController.js"
                         }
                     ]
