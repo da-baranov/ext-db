@@ -25,7 +25,6 @@
 
     _extend: function () {
         const me = this;
-        me.setFirstRowAlwaysSelected();
         me.handleKeys();
     },
 
@@ -41,6 +40,7 @@
         });
 
         grid.on("rowkeydown", function (sender, record, element, rowIndex, e) {
+            const me = this;
 
             if (e.getKey() === Ext.event.Event.INSERT) {
                 return grid.fireEvent("oninsert", sender, record, element, rowIndex);
@@ -52,7 +52,7 @@
                 }
             }
 
-            if (e.getKey() === Ext.event.Event.ENTER) {
+            if (e.getKey() === Ext.event.Event.F4) {
                 if (record) {
                     return grid.fireEvent("onedit", sender, record, element, rowIndex);
                 }
@@ -64,25 +64,9 @@
                 var result = grid.fireEvent("onrefresh", sender, record, element, rowIndex);
                 if (!result) return false;
 
-                if (me.getStore()) {
-                    me.getStore().reload();
-                }
+                const store = me.getStore();
+                if (store) store.reload();
             }
         });
-    },
-
-    setFirstRowAlwaysSelected: function () {
-        const grid = this;
-
-        const store = grid.getStore();
-        const selectionModel = this.getSelectionModel();
-
-        if (store && selectionModel) {
-            store.on("load", function (sender, records) {
-                if (records && records.length) {
-                    selectionModel.select([records[0]]);
-                }
-            });
-        }
     }
 });

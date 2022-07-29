@@ -2310,7 +2310,18 @@ Ext.define('ExtDb.AsyncLoader', {statics:{load:function(url) {
   }
   return Promise.all(arr);
 }}});
-Ext.define('ExtDb.Error', {statics:{toError:function(e) {
+Ext.define('ExtDb.ErrorMessageBox', {extend:'Ext.window.Window', modal:true, title:'Error', width:400, height:160, layout:'border', bodyPadding:10, config:{message:undefined, stack:undefined}, initComponent:function() {
+  this.callParent(arguments);
+  this.down('#lblMessage').setText(this.getMessage());
+  this.down('#txtStack').setValue(this.getStack());
+}, items:[{xtype:'container', region:'west', width:60, layout:{type:'vbox', pack:'start', align:'start'}, border:0, items:[{xtype:'component', cls:'x-message-box-icon x-message-box-error'}]}, {xtype:'container', region:'center', layout:'border', items:[{xtype:'container', region:'north', height:80, layout:'fit', items:[{xtype:'label', itemId:'lblMessage'}]}, {xtype:'container', region:'center', layout:'fit', items:[{xtype:'textarea', itemId:'txtStack', inputAttrTpl:'wrap\x3d"off"', scrollable:true, 
+style:'white-space:nowrap; overflow: scroll;'}]}]}], fbar:[{xtype:'button', text:'Details', handler:function() {
+  this.up('window').setHeight(300);
+}}, {text:'OK', handler:function() {
+  this.up('window').fireEvent('ok');
+  this.up('window').close();
+}}]});
+Ext.define('ExtDb.Error', {requires:['ExtDb.ErrorMessageBox'], statics:{toError:function(e) {
   if (!e) {
     return new Error('Unexpected error');
   }
@@ -2395,6 +2406,10 @@ Ext.define('ExtDb.Error', {statics:{toError:function(e) {
   if (error) {
     throw error;
   }
+}, errorMessageBox:function(e) {
+  var error = this.toError(e);
+  var messageBox = new ExtDb.ErrorMessageBox({message:error.message, stack:error.stack});
+  messageBox.show();
 }}});
 Ext.define('ExtDb.FontAwesome', {requires:['ExtDb.AsyncLoader'], statics:{_faUrl:'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/', version:'6.1.1', enable:function() {
   var baseUrl = this._faUrl + this.version;
@@ -2440,11 +2455,29 @@ Ext.define('ExtDb.MessageBox', {statics:{alert:function(title, message) {
 Ext.define('ExtDb.Version', {statics:{getVersion:function() {
   return '1.0.0.0';
 }}});
-Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ext.app.ViewController', _forceClose:false, _confirmMessage:'You are closing a form that has unsaved changes. Do you want to save changes?', control:{'#':{beforeclose:function() {
+Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ext.app.ViewController', control:{'#':{beforeclose:function() {
+  var view = this.getView();
   return this.handleModalFormClosing();
 }}, 'form':{validitychange:function(sender, valid) {
   this.getViewModel().set('formValid', valid);
-}}}, hasChanges:function() {
+}}}, isFormValid:function() {
+  var view = this.getView();
+  if (!view) {
+    return true;
+  }
+  var forms = view.query('form');
+  if (!forms || !Array.isArray(forms) || !forms.length) {
+    return true;
+  }
+  for (var i = 0; i < forms.length; i++) {
+    var form = forms[i];
+    var formValid = form.isValid();
+    if (!formValid) {
+      return false;
+    }
+  }
+  return true;
+}, hasChanges:function() {
   var me = this;
   var viewModel = me.getViewModel();
   if (!viewModel) {
@@ -2455,7 +2488,8 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
     for (var key in data) {
       var value = viewModel.get(key);
       if (value instanceof Ext.data.Model) {
-        if (value.dirty) {
+        var modelChanges = value.getChanges();
+        if (modelChanges && Object.keys(modelChanges) && Object.keys(modelChanges).length) {
           return true;
         }
       }
@@ -2485,38 +2519,46 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
 }, handleModalFormClosing:function() {
   var me = this;
   var view = me.getView();
-  if (view.closeMe) {
-    view.closeMe = false;
+  if (view.allowClose) {
     return true;
   }
-  if (me._forceClose) {
-    view.closeMe = true;
-    view.close();
-  } else {
-    if (me.hasChanges()) {
-      Ext.Msg.show({title:'Question', message:me._confirmMessage, buttons:Ext.Msg.YESNOCANCEL, icon:Ext.Msg.QUESTION, fn:function(btn) {
-        if (btn === 'yes') {
-          try {
-            me.save();
-          } catch (saveex) {
-            view.closeMe = false;
-          }
+  if (me.isFormValid() === false) {
+    Ext.Msg.show({title:'Question', message:'Form has invalid values. Close anyway?', buttons:Ext.Msg.YESNO, icon:Ext.Msg.QUESTION, fn:function(btn) {
+      if (btn === 'yes') {
+        view.allowClose = true;
+        view.close();
+      } else {
+        view.allowClose = false;
+      }
+    }});
+    return false;
+  }
+  if (me.hasChanges() === true) {
+    Ext.Msg.show({title:'Question', message:'You are closing a form that has unsaved changes. Do you want to save changes?', buttons:Ext.Msg.YESNOCANCEL, icon:Ext.Msg.QUESTION, fn:function(btn) {
+      if (btn === 'yes') {
+        try {
+          me.saveRecord();
+          view.allowClose = true;
+          view.close();
+        } catch (saveex) {
+          ExtDb.MessageBox.error(saveex.message);
+          view.allowClose = false;
+        }
+      } else {
+        if (btn === 'no') {
+          view.allowClose = true;
+          view.close();
         } else {
-          if (btn === 'no') {
-            view.closeMe = true;
-            view.close();
-          } else {
-            if (btn === 'cancel') {
-              view.closeMe = false;
-            }
+          if (btn === 'cancel') {
+            view.allowClose = false;
           }
         }
-      }});
-    } else {
-      view.closeMe = true;
-      view.close();
-    }
+      }
+    }});
+    return false;
   }
+  view.allowClose = true;
+  view.close();
   return false;
 }, getRecord:function() {
   var viewModel = this.getViewModel();
@@ -2541,11 +2583,15 @@ Ext.define('ExtDb.app.ModalViewController', {requres:['ExtDb.Error'], extend:'Ex
   }
 }, saveRecord:function() {
   var record = this.getRecord();
+  record.endEdit();
+  record.dirty = false;
   this.fireEvent('saved', this, record);
   var view = this.getView();
   if (view) {
     view.fireEvent('saved', view, record);
   }
+  view.allowClose = true;
+  view.close();
 }, cancelRecord:function() {
   var view = this.getView();
   if (view && view.close) {
@@ -2631,7 +2677,6 @@ Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgri
   this._extend();
 }, _extend:function() {
   var me = this;
-  me.setFirstRowAlwaysSelected();
   me.handleKeys();
 }, handleKeys:function() {
   var grid = this;
@@ -2642,6 +2687,7 @@ Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgri
     grid.fireEvent('onedit', sender, record, element, rowIndex);
   });
   grid.on('rowkeydown', function(sender, record, element, rowIndex, e) {
+    var me = this;
     if (e.getKey() === Ext.event.Event.INSERT) {
       return grid.fireEvent('oninsert', sender, record, element, rowIndex);
     }
@@ -2650,7 +2696,7 @@ Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgri
         return grid.fireEvent('ondelete', sender, record, element, rowIndex);
       }
     }
-    if (e.getKey() === Ext.event.Event.ENTER) {
+    if (e.getKey() === Ext.event.Event.F4) {
       if (record) {
         return grid.fireEvent('onedit', sender, record, element, rowIndex);
       }
@@ -2661,20 +2707,10 @@ Ext.define('ExtDb.grid.Panel', {extend:'Ext.grid.Panel', alias:['widget.extdbgri
       if (!result) {
         return false;
       }
-      if (me.getStore()) {
-        me.getStore().reload();
+      var store = me.getStore();
+      if (store) {
+        store.reload();
       }
     }
   });
-}, setFirstRowAlwaysSelected:function() {
-  var grid = this;
-  var store = grid.getStore();
-  var selectionModel = this.getSelectionModel();
-  if (store && selectionModel) {
-    store.on('load', function(sender, records) {
-      if (records && records.length) {
-        selectionModel.select([records[0]]);
-      }
-    });
-  }
 }});

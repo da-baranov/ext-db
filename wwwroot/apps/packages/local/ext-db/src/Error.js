@@ -1,4 +1,7 @@
 ﻿Ext.define("ExtDb.Error", {
+    requires: [
+        "ExtDb.ErrorMessageBox"
+    ],
     statics: {
         toError: function (e) {
             // Undefined
@@ -112,6 +115,12 @@
         raiseError: function (e) {
             const error = this.toError(e);
             if (error) throw error;
+        },
+
+        errorMessageBox: function (e) {
+            const error = this.toError(e);
+            const messageBox = new ExtDb.ErrorMessageBox({ message: error.message, stack: error.stack });
+            messageBox.show();
         }
     }
 });

@@ -29,7 +29,7 @@
                 {
                     iconCls: 'fa fa-edit',
                     text: 'Edit',
-                    tooltip: "ENTER",
+                    tooltip: "F4",
                     bind: {
                         disabled: "{!selection}"
                     },
@@ -47,7 +47,8 @@
                 {
                     iconCls: 'fas fa-sync',
                     text: "Refresh",
-                    tooltip: "F5"
+                    tooltip: "F5",
+                    handler: "refreshPatients"
                 },
                 '-',
                 {

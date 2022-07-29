@@ -1,20 +1,18 @@
-﻿Ext.define('ExtDbDemo.view.GridViewModel', {
+Ext.define('ExtDbDemo.view.ErrorDemoViewModel', {
     extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.gridviewmodel',
-
+    alias: 'viewmodel.errordemoview',
     data: {
-        selection: undefined,           // Grid selected record
-        checked: []                     // Grid checked records
+        name: 'ExtDbDemo'
     },
 
     stores: {
         patients: {
             model: "ExtDbDemo.model.Patient",
-            autoLoad: true,
+            autoLoad: false,
             autoSync: false,
             proxy: {
                 type: 'ajax',
-                url: Ext.getResourcePath('patients.json'),
+                url: Ext.getResourcePath('patients1.json'), // HTTP 404
                 reader: {
                     type: 'json',
                     rootProperty: 'data'
@@ -22,4 +20,5 @@
             }
         }
     }
+
 });

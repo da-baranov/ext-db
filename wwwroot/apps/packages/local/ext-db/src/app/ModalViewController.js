@@ -2,9 +2,6 @@
     requres: ['ExtDb.Error'],
     extend: 'Ext.app.ViewController',
 
-    _forceClose: false,
-    _confirmMessage: "You are closing a form that has unsaved changes. Do you want to save changes?",
-
     control: {
         "#": {
             // Modal form close event handler
@@ -21,6 +18,9 @@
         }
     },
 
+    /**
+     * @private
+     */
     isFormValid() {
         const view = this.getView();
         if (!view) return true;
@@ -39,13 +39,10 @@
 
     /**
      * @private
-     * 
      */
     hasChanges: function () {
 
         const me = this;
-
-        if (me._forceClose) return false;
 
         const viewModel = me.getViewModel();
         if (!viewModel) {
@@ -83,6 +80,9 @@
         return false;
     },
 
+    /**
+     * @private
+     */
     handleModalFormClosing: function () {
         const me = this;
         const view = me.getView();
@@ -110,17 +110,20 @@
             });
             return false;
         }
-        
+
+        // Form has unsaved changes
         if (me.hasChanges() === true) {
             Ext.Msg.show({
                 title: "Question",
-                message: me._confirmMessage,
+                message: "You are closing a form that has unsaved changes. Do you want to save changes?",
                 buttons: Ext.Msg.YESNOCANCEL,
                 icon: Ext.Msg.QUESTION,
                 fn: function (btn) {
                     if (btn === "yes") {
                         try {
-                            me.saveRecord(); // => view.allowClose = true; view.close();
+                            me.saveRecord();
+                            view.allowClose = true;
+                            view.close();
                         }
                         catch (saveex) {
                             ExtDb.MessageBox.error(saveex.message);
@@ -145,8 +148,9 @@
     },
 
     /**
-     * @
+     * Returns an instance of model
      * 
+     * @returns Ext.data.Model
      * @virtual
      * @protected
      */
@@ -158,6 +162,10 @@
         return undefined;
     },
 
+    /**
+     * Sets an instance of model
+     * @param {Ext.data.Model} record
+     */
     setRecord: function (record) {
         const viewModel = this.getViewModel();
         if (viewModel) {
@@ -166,11 +174,12 @@
     },
 
     /**
+     * Intitiates the process of creating a new record
+     * @param {any} args - Any parameters to initialize the model. 
+     * @see setRecord
+     * 
      * @public
      * @virtual
-     * 
-     * Intitiates the process of creating a new record
-     * @param {any} args 
      */
     createRecord: function (args) {
         // Base implementation
@@ -183,10 +192,12 @@
     /**
      * Initiates the process of editing data in a modal form
      * 
+     * @param {any} args - Any parameters to initialize the model
+     * @see setRecord
+     * 
      * @public
      * @virtual
-     * @param {any} args - the model to be edited
-     * @param {string} name - the name of the variable to store the model
+     * 
      */
     editRecord: function (args) {
         // Base implementation
@@ -197,9 +208,9 @@
     },
 
     /**
-     * Saves changes
+     * Saves changes. Must me called by descendants
+     * 
      * @virtual
-     * @returns boolean
      * 
      */
     saveRecord: function () {
@@ -214,15 +225,15 @@
         const view = this.getView();
         if (view) view.fireEvent("saved", view, record);
 
-        // Close view
         view.allowClose = true;
         view.close();
     },
 
     /**
      * Closes the form 
-     * @virtual
+     * 
      * @returns void
+     * @virtual
      */
     cancelRecord: function () {
         const view = this.getView();

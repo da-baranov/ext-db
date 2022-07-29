@@ -3,7 +3,7 @@ Ext.define('ExtDbDemo.view.ModalForm',{
     alias: "widget.modalform",
     modal: true,
     width: 600,
-    height: 450,
+    height: 200,
     title: "Patient",
 
     requires: [

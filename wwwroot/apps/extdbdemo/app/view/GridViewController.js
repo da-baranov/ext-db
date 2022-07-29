@@ -19,7 +19,7 @@
                 await this.deletePatients();
             },
             onrefresh: async function () {
-                
+                await this.refreshPatients();
             }
         }
     },
@@ -69,5 +69,10 @@
         if (await ExtDb.MessageBox.confirm("Question", "Remove?") === "yes") {
             store.remove(checked);
         }
+    },
+
+    refreshPatients: function () {
+        const store = this.getStore("patients");
+        store.reload();
     }
 });
