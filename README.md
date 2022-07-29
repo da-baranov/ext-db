@@ -18,6 +18,8 @@ Various ExtJS notes, tools, utilities, and extensions.
 
 [Sencha ExtJS Grid + Modal + CRUD full example](docs/modals.md)
 
+[Generic exception handling in ExtJS](docs/error-handler.md)
+
 ## Recipes
 
 Complete Grid/Modal CRUD [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)
