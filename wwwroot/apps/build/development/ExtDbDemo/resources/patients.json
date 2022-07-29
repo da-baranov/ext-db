@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "birthTime": "1980-01-01T00:00:00",
+      "gender": "M"
+    },
+    {
+      "id": 2,
+      "firstName": "Mickey",
+      "lastName": "Mouse",
+      "birthTime": "1930-01-01T00:00:00",
+      "gender": "M"
+    },
+    {
+      "id": 3,
+      "firstName": "Donald",
+      "lastName": "Duck",
+      "birthTime": "1931-01-01T00:00:00",
+      "gender": "M"
+    },
+    {
+      "id": 4,
+      "firstName": "Sarah",
+      "lastName": "Connor",
+      "birthTime": "1950-01-01T00:00:00",
+      "gender": "F"
+    }
+  ]
+}
