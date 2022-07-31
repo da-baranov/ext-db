@@ -186,3 +186,37 @@ sencha app build development
 ```
 
 * Run debugger and navigate the browser to `/Test`
+
+## Method 3
+
+Redirect requests from `./wwwroot` to the root directory of your ExtJS application:
+
+`Program.cs`
+
+```csharp
+
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    WebRootPath = "demo"
+});
+
+...
+
+app.UseDefaultFiles();                        // makes `index.html` default
+app.UseStaticFiles();                         // allows static files
+
+// !!! If you use ExtJS workspaces, you'll also need to redirect requests to `ext` and `build` directories
+app.UseStaticFiles(new StaticFileOptions
+{
+    RequestPath = "/ext",
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "ext"))
+});
+app.UseStaticFiles(new StaticFileOptions
+{
+    RequestPath = "/build",
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "build"))
+});
+
+
+```
