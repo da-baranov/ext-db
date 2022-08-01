@@ -34,6 +34,11 @@
       "text": "Global exception handlers in ExtJS",
       "leaf": true,
       "id": 6
+    },
+    {
+      "text": "Modal dictionary dialog UX, trigger buttons, hotkeys",
+      "leaf": true,
+      "id": 7
     }
   ]
 }

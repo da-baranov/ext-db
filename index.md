@@ -21,14 +21,24 @@
 
 ## Demos
 
-Complete Grid/Modal CRUD [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)
+Complete Grid/Modal CRUD 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/1)
 
-Async message boxes [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/0)
+Async message boxes 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/0)
 
-ACE code editor as ExtJS component [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/2)
+ACE code editor as ExtJS component 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/2)
 
-How to use latest Font Awesome from CDN [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/3)
+How to use latest Font Awesome from CDN 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/3)
 
-Async Ajax/JSON requests in ExtJS [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/4)
+Async Ajax/JSON requests in ExtJS 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/4)
 
-Generic exception handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
+Generic exception handling in ExtJS - 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
+
+A simple keyboard-friendly input field with a lookup button that opens a modal form to select some value - 
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6) |
+[source](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6)

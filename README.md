@@ -31,6 +31,6 @@ How to use latest Font Awesome from CDN [demo](https://da-baranov.github.io/ext-
 
 Async Ajax/JSON requests in ExtJS [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/4)
 
-Generic exception handler in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
+Generic exception handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
 
-Global exception handling in ExtJS - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6)
+A simple keyboard-friendly input field with a lookup button that opens a modal form to select some value - [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6)

@@ -1,6 +1,9 @@
 ﻿Ext.define('ExtDbDemo.view.GridViewModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.gridviewmodel',
+    requires: [
+        "ExtDbDemo.store.Patient"
+    ],
 
     data: {
         selection: undefined,           // Grid selected record
@@ -9,17 +12,7 @@
 
     stores: {
         patients: {
-            model: "ExtDbDemo.model.Patient",
-            autoLoad: true,
-            autoSync: false,
-            proxy: {
-                type: 'ajax',
-                url: Ext.getResourcePath('patients.json'),
-                reader: {
-                    type: 'json',
-                    rootProperty: 'data'
-                }
-            }
+            type: "patient"
         }
     }
 });

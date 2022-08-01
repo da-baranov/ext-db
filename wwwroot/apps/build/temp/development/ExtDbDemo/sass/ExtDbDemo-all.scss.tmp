@@ -937,6 +937,7 @@ $include-extdb-grid-panel: dynamic(true);;
 $include-extdbdemo-application: dynamic(true);;
 $include-extdbdemo-view-acedemoview: dynamic(true);;
 $include-extdbdemo-model-patient: dynamic(true);;
+$include-extdbdemo-store-patient: dynamic(true);;
 $include-extdbdemo-view-ajaxview: dynamic(true);;
 $include-extdbdemo-view-asyncmessageboxesview: dynamic(true);;
 $include-extdbdemo-view-errordemoview: dynamic(true);;
@@ -955,6 +956,12 @@ $include-extdbdemo-view-modalformmodel: dynamic(true);;
 $include-extdbdemo-view-main-main: dynamic(true);;
 $include-extdbdemo-view-main-maincontroller: dynamic(true);;
 $include-extdbdemo-view-main-mainmodel: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgriddialog: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgriddialogcontroller: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgriddialogmodel: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgridview: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgridviewcontroller: dynamic(true);;
+$include-extdbdemo-view-modalgrid-modalgridviewmodel: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */

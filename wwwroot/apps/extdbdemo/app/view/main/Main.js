@@ -12,7 +12,8 @@ Ext.define('ExtDbDemo.view.main.Main', {
         'ExtDbDemo.view.FontAwesomeView',
         'ExtDbDemo.view.AjaxView',
         'ExtDbDemo.view.ErrorDemoView',
-        'ExtDbDemo.view.GlobalExView'
+        'ExtDbDemo.view.GlobalExView',
+        'ExtDbDemo.view.modalgrid.ModalGridView'
     ],
 
     controller: 'main',
@@ -71,6 +72,9 @@ Ext.define('ExtDbDemo.view.main.Main', {
                 },
                 {
                     xtype: "globalexview"
+                },
+                {
+                    xtype: "modalgridview"
                 }
             ]
         }

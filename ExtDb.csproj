@@ -17,7 +17,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="wwwroot\apps\extdbdemo\app\model\" />
-    <Folder Include="wwwroot\apps\extdbdemo\app\store\" />
     <Folder Include="wwwroot\apps\packages\local\ext-db\src\mixin\" />
     <Folder Include="wwwroot\apps\packages\local\ext-db\src\plugin\" />
     <Folder Include="wwwroot\apps\packages\local\ext-db\src\store\" />
