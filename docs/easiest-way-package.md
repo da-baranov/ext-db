@@ -30,8 +30,8 @@ Result:
 ws
   |- ext
   |- apps
-    |- home-app
-    |- login-app
+    |- home-page
+    |- login-page
   |- packages
     |- local
       |- test                   <- package content
@@ -64,5 +64,3 @@ Run build:
 $ sencha package build development
 # sencha package build production
 ```
-
-Enjoy!
