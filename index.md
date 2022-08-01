@@ -41,4 +41,4 @@ Generic exception handling in ExtJS -
 
 A simple keyboard-friendly input field with a lookup button that opens a modal form to select some value - 
 [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6) |
-[source](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6)
+[source](https://github.com/da-baranov/ext-db/tree/main/wwwroot/apps/extdbdemo/app/view/modalgrid)
