@@ -40,5 +40,5 @@
 [demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/5)
 
 👆 A simple keyboard-friendly input field with a lookup button that opens a modal form to select some value - 
-[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/6) |
+[demo](https://da-baranov.github.io/ext-db/wwwroot/index.html#example/7) |
 [source](https://github.com/da-baranov/ext-db/tree/main/wwwroot/apps/extdbdemo/app/view/modalgrid)
