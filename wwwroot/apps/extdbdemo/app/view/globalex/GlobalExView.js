@@ -1,9 +1,9 @@
-Ext.define('ExtDbDemo.view.GlobalExView',{
+Ext.define('ExtDbDemo.view.globalex.GlobalExView',{
     extend: 'Ext.panel.Panel',
 
     requires: [
-        'ExtDbDemo.view.GlobalExController',
-        'ExtDbDemo.view.GlobalExModel'
+        'ExtDbDemo.view.globalex.GlobalExController',
+        'ExtDbDemo.view.globalex.GlobalExModel'
     ],
 
     controller: 'globalex',

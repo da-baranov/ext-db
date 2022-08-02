@@ -1,4 +1,4 @@
-﻿Ext.define('ExtDbDemo.view.AsyncMessageBoxesView', {
+﻿Ext.define('ExtDbDemo.view.asyncmessageboxes.AsyncMessageBoxesView', {
     requires: ["ExtDb.MessageBox"],
     alias: "widget.asyncmessageboxesview",
     extend: "Ext.panel.Panel",
@@ -42,20 +42,6 @@
                         const mr = await ExtDb.MessageBox.confirm("Confirm", "Exit program?");
                     },
                     iconCls: "fa fa-question-circle"
-                }
-            ]
-        },
-        {
-            title: "Source",
-            layout: "fit",
-            region: "south",
-            height: 300,
-            split: true,
-            items: [
-                {
-                    xtype: "acecodeeditor",
-                    mode: "javascript",
-                    url: "apps/extdbdemo/app/view/AsyncMessageBoxesView.js"
                 }
             ]
         }

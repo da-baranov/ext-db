@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.GlobalExController', {
+Ext.define('ExtDbDemo.view.globalex.GlobalExController', {
     requires: ['ExtDb.Error'],
     extend: 'Ext.app.ViewController',
     alias: 'controller.globalex',

@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.ModalFormModel', {
+Ext.define('ExtDbDemo.view.gridcrud.ModalFormModel', {
     extend: 'ExtDb.app.ModalViewModel',
     alias: 'viewmodel.modalform',
 

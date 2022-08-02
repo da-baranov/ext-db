@@ -1,5 +1,5 @@
-﻿Ext.define("ExtDbDemo.view.AjaxView", {
-    requires: ["ExtDb.component.AceCodeEditor","ExtDb.Ajax"],
+﻿Ext.define("ExtDbDemo.view.asyncajax.AjaxView", {
+    requires: ["ExtDb.Ajax"],
     extend: "Ext.panel.Panel",
     alias: "widget.ajaxview",
     layout: "border",
@@ -35,20 +35,6 @@
             region: "south",
             itemId: "txtJson",
             split: true
-        },
-        {
-            title: "Source",
-            layout: "fit",
-            region: "south",
-            height: 300,
-            split: true,
-            items: [
-                {
-                    xtype: "acecodeeditor",
-                    mode: "javascript",
-                    url: "apps/extdbdemo/app/view/AjaxView.js"
-                }
-            ]
         }
     ]
 });

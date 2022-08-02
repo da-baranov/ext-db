@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.GlobalExModel', {
+Ext.define('ExtDbDemo.view.globalex.GlobalExModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.globalex',
     data: {

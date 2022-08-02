@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.ErrorDemoViewController', {
+Ext.define('ExtDbDemo.view.globalerr.ErrorDemoViewController', {
     requires: [
         "ExtDb.Error",
         "ExtDb.ErrorMessageBox"

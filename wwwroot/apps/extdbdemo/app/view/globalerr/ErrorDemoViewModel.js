@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.ErrorDemoViewModel', {
+Ext.define('ExtDbDemo.view.globalerr.ErrorDemoViewModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.errordemoview',
     data: {

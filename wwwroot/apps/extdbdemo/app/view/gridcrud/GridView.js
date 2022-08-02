@@ -1,9 +1,8 @@
-﻿Ext.define("ExtDbDemo.view.GridView", {
+﻿Ext.define("ExtDbDemo.view.gridcrud.GridView", {
     requires: [ 
         "ExtDb.grid.Panel",
-        "ExtDb.component.AceCodeEditor",
-        "ExtDbDemo.view.GridViewController",
-        "ExtDbDemo.view.GridViewModel"
+        "ExtDbDemo.view.gridcrud.GridViewController",
+        "ExtDbDemo.view.gridcrud.GridViewModel"
     ],
     extend: "Ext.panel.Panel",
     title: "Complete CRUD (Grid + Modal Form) example",
@@ -102,49 +101,6 @@
             bodyPadding: 4,
             split: true,
             html: 'A full ExtJS Grid + Modal CRUD example. The modal form controller controls the lifecycle of the modal form, in particular, prevents loss of unsaved changes, and does not allow a user to save invalid data'
-        },
-        {
-            xtype: "tabpanel",
-            region: "south",
-            height: 400,
-            items: [
-                // 0
-                {
-                    title: "GridView.js",
-                    layout: "fit",
-                    items: [
-                        {
-                            xtype: "acecodeeditor",
-                            mode: "javascript",
-                            url: "apps/extdbdemo/app/view/GridView.js"
-                        }
-                    ]
-                },
-                // 1
-                {
-                    title: "ModalViewController.js",
-                    layout: "fit",
-                    items: [
-                        {
-                            xtype: "acecodeeditor",
-                            mode: "javascript",
-                            url: "apps/packages/local/ext-db/src/app/ModalViewController.js"
-                        }
-                    ]
-                },
-                // 2
-                {
-                    title: "ModalViewModel.js",
-                    layout: "fit",
-                    items: [
-                        {
-                            xtype: "acecodeeditor",
-                            mode: "javascript",
-                            url: "apps/packages/local/ext-db/src/app/ModalViewModel.js"
-                        }
-                    ]
-                }
-            ]
         }
     ]
 });

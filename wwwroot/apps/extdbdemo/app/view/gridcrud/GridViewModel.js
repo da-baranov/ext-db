@@ -1,4 +1,4 @@
-﻿Ext.define('ExtDbDemo.view.GridViewModel', {
+﻿Ext.define('ExtDbDemo.view.gridcrud.GridViewModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.gridviewmodel',
     requires: [

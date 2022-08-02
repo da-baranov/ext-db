@@ -1,6 +1,6 @@
-﻿Ext.define('ExtDbDemo.view.GridViewController', {
+﻿Ext.define('ExtDbDemo.view.gridcrud.GridViewController', {
     requires: [
-        "ExtDbDemo.view.ModalForm",
+        "ExtDbDemo.view.gridcrud.ModalForm",
         "ExtDbDemo.model.Patient",
         "ExtDb.MessageBox"
     ],
@@ -28,7 +28,7 @@
         const me = this;
         const store = this.getStore("patients");
 
-        const form = new ExtDbDemo.view.ModalForm();
+        const form = new ExtDbDemo.view.gridcrud.ModalForm();
         form.on("saved", function (sender, model) {
             store.add(model);
         });

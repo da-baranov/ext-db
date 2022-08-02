@@ -1,7 +1,4 @@
-﻿Ext.define("ExtDbDemo.view.FontAwesomeView", {
-    requires: [
-        "ExtDb.component.AceCodeEditor"
-    ],
+﻿Ext.define("ExtDbDemo.view.fontawesome.FontAwesomeView", {
     extend: "Ext.panel.Panel",
     alias: "widget.fontawesomeview",
     title: "Font Awesome CDN icons example",
@@ -21,21 +18,6 @@
             height: 40,
             region: "south",
             split: true
-        },
-        {
-            region: "south",
-            split: true,
-            xtype: "acecodeeditor",
-            mode: "javascript",
-            height: 200,
-            value:
-                "Ext.define('ExtDbDemo.Application', {\r\n" +
-                "    requires: [\"ExtDb.FontAwesome\"]\r\n" + 
-                "    ....\r\n" + 
-                "    launch: function () {\r\n" +
-                "        ExtDb.FontAwesome.enable();\r\n" +
-                "    }\r\n" + 
-                "}"
         }
     ]
 });

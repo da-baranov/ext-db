@@ -1,4 +1,4 @@
-Ext.define('ExtDbDemo.view.ModalForm',{
+Ext.define('ExtDbDemo.view.gridcrud.ModalForm',{
     extend: 'Ext.window.Window',
     alias: "widget.modalform",
     modal: true,
@@ -7,8 +7,8 @@ Ext.define('ExtDbDemo.view.ModalForm',{
     title: "Patient",
 
     requires: [
-        'ExtDbDemo.view.ModalFormController',
-        'ExtDbDemo.view.ModalFormModel'
+        'ExtDbDemo.view.gridcrud.ModalFormController',
+        'ExtDbDemo.view.gridcrud.ModalFormModel'
     ],
 
     layout: "border",

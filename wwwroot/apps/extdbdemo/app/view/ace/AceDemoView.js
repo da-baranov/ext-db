@@ -1,4 +1,4 @@
-﻿Ext.define("ExtDbDemo.View.AceDemoView", {
+﻿Ext.define("ExtDbDemo.view.ace.AceDemoView", {
     requires: [
         "ExtDb.component.AceCodeEditor"
     ],
