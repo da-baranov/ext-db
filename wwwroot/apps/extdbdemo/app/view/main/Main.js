@@ -26,9 +26,9 @@ Ext.define('ExtDbDemo.view.main.Main', {
     items: [
         {
             xtype: "container",
-            html: "<div><h1>ExtDb</h1> <div>Sencha ExtJS tips | tricks | recipes | examples</div></div>",
-            height: 90,
-            padding: "0 0 0 20",
+            html: "<div><strong>EXTDB</strong> - Sencha ExtJS tips | recipes | examples </div></div>",
+            height: 30,
+            padding: "7 0 0 20",
             region: "north"
         },
         {

@@ -28,7 +28,14 @@
                 }
             ]
         },
-        
+        {
+            xtype: "panel",
+            height: 50,
+            region: "south",
+            split: true,
+            bodyPadding: 10,
+            html: "Example of asynchronous Ajax invocation of an external REST web service"
+        },
         {
             xtype: "acecodeeditor",
             height: 200,
